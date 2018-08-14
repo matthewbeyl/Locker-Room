@@ -6,7 +6,7 @@ function* qbSaga() {
     yield takeLatest(PLAYER_ACTIONS.FETCH_PLAYERS, fetchPlayers);
   }
 
-function* fetchPlayers() {
+function* fetchPlayers() {    
     try {
         const QBs = yield getQuarterbacks();
         yield put({

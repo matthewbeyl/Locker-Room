@@ -61,13 +61,8 @@ const App = () => (
           path="/def"
           component={DEFPage}
         />
-        {/* <Route
-          path="/info"
-          component={InfoPage}
-        /> */}
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
-
       </Switch>
     </Router>
   </div>

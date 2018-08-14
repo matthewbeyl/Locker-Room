@@ -13,7 +13,6 @@ class QBPage extends Component {
         return (
             <div>
                 <div>
-                    {}
                     QB PAGE
                 </div>
             </div>
