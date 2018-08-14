@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
+const request = require('request');
 console.log('In template router');
 
-router.get('/https://www.fantasyfootballnerd.com/service/players/json/qft55ekjyswk/QB', (req, res) => {
-    console.log('in router get').then((res) => {
-        res.send(result.rows)
-    }).catch((error) => {
-        console.log(error);
-        res.sendstatus(500);
-    });
+router.get('/:player_type', (req, res) => {
+    console.log(req.params.player_type)
+    let options = {
+        url: `https://www.fantasyfootballnerd.com/service/players/json/qft55ekjyswk/${req.params.player_type}`,
+        method: 'GET'
+    };
+    request(options, function (err, response) {
+        // console.log(response.body);
+        if (err) res.sendStatus(500)
+        res.send(response.body)
+    })
 });
 
 /**

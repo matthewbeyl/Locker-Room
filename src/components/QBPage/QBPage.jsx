@@ -13,6 +13,7 @@ class QBPage extends Component {
         return (
             <div>
                 <div>
+                    {/* {JSON.stringify(res.body)} */}
                     QB PAGE
                 </div>
             </div>
