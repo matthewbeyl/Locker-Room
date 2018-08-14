@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 
-const qbName = (state = [], action) => {
+const quarterback = (state = [], action) => {
     console.log(action);
     switch (action.type) {
         case PLAYER_ACTIONS.SET_PLAYERS:
@@ -13,5 +13,5 @@ const qbName = (state = [], action) => {
 
 
 export default combineReducers({
-    qbName
+    quarterback
 });

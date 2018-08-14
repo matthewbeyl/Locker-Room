@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPlayers } from '../../redux/actions/playerActions';
 
+const mapStateToProps = state => {
+   
+}
+
 class QBPage extends Component {
 
     componentDidMount() {
-        this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchPlayers());        
     }
 
     render() {
-        
         return (
             <div>
                 <div>
-                    {/* {JSON.stringify(res.body)} */}
                     QB PAGE
                 </div>
             </div>
@@ -21,4 +23,4 @@ class QBPage extends Component {
     }
 }
 
-export default connect()(QBPage)
+export default connect(mapStateToProps)(QBPage)

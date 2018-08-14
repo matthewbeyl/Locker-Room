@@ -4,7 +4,7 @@ const request = require('request');
 console.log('In template router');
 
 router.get('/:player_type', (req, res) => {
-    console.log(req.params.player_type)
+    // console.log(req.params.player_type)
     let options = {
         url: `https://www.fantasyfootballnerd.com/service/players/json/qft55ekjyswk/${req.params.player_type}`,
         method: 'GET'
