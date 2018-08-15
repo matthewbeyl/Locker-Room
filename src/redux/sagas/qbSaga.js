@@ -1,16 +1,16 @@
-import { PLAYER_ACTIONS} from '../actions/playerActions';
+import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
 import { getQuarterbacks } from '../requests/QBRequest';
 
 function* qbSaga() {    
-    yield takeLatest(PLAYER_ACTIONS.FETCH_PLAYERS, fetchPlayers);
+    yield takeLatest(PLAYER_ACTIONS.FETCH_QB, fetchQB);
   }
 
-function* fetchPlayers() {    
+function* fetchQB() {    
     try {
         const QBs = yield getQuarterbacks();
         yield put({
-            type: PLAYER_ACTIONS.SET_PLAYERS,
+            type: PLAYER_ACTIONS.SET_QB,
             payload: QBs
           });
     } catch (error) {

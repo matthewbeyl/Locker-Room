@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../redux/actions/playerActions';
+import { fetchQB } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -24,7 +24,7 @@ class QBPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchQB());
     }
 
     goToRb = (event) => {

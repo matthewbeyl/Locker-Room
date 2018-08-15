@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-console.log('In template router');
 
 router.get('/:player_type', (req, res) => {
     // console.log(req.params.player_type)

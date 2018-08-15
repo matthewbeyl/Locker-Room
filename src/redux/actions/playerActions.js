@@ -1,9 +1,14 @@
 export const PLAYER_ACTIONS = {
-    FETCH_PLAYERS: 'FETCH_PLAYERS',
-    SET_PLAYERS: 'SET_PLAYERS',
-    DISPLAY_PLAYERS: 'DISPLAY_PLAYERS',
+    FETCH_RB: 'FETCH_RB',
+    SET_RB: 'SET_RB',
+    FETCH_QB: 'FETCH_QB',
+    SET_QB: 'SET_QB',
 }
 
-export function fetchPlayers() {
-    return { type: PLAYER_ACTIONS.FETCH_PLAYERS }
+export function fetchQB() {
+    return { type: PLAYER_ACTIONS.FETCH_QB }
+};
+
+export function fetchRB() {
+    return { type: PLAYER_ACTIONS.FETCH_RB }
 };
