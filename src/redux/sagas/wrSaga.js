@@ -3,10 +3,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { getWidereceivers } from '../requests/WRRequest';
 
 function* wrSaga() {    
-    yield takeLatest(PLAYER_ACTIONS.FETCH_WR, fetchWRs);
+    yield takeLatest(PLAYER_ACTIONS.FETCH_WR, fetchWR);
   }
 
-function* fetchWRs() {    
+function* fetchWR() {    
     try {
         const WRs = yield getWidereceivers();
         yield put({

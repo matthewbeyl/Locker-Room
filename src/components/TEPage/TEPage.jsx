@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
+import { fetchTE } from '../../redux/actions/playerActions';
 
 const styles = theme => ({
     button: {
@@ -17,14 +16,14 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
+    tightends: state.tightends
   });
 
 class TEPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        // this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchTE());
     }
 
     goToK = (event) => {
@@ -34,11 +33,21 @@ class TEPage extends Component {
     }
 
     render() {
+        let teList;
+        if (this.props.tightends.tightends.Players) {
+            teList = this.props.tightends.tightends.Players.map((TE, index) => {
+                return (
+                    <option value="TE2" key={index}>{TE.displayName}</option>
+                )
+            })
+        }
         return (
             <div>
                 <form onSubmit={this.goToK}>
                     <h1>Select Tight End(s)</h1>
-                    <input type="text" placeholder="Tightends" />
+                    <select>
+                        {teList}
+                    </select>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>
