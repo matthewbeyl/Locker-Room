@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../redux/actions/playerActions';
+import { fetchWR } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -17,14 +17,14 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
+    widereceivers: state.widereceivers
   });
 
 class WRPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        // this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchWR());
     }
 
     goToTe = (event) => {
@@ -34,11 +34,21 @@ class WRPage extends Component {
     }
 
     render() {
+        let wrList;
+        if (this.props.widereceivers.widereceivers.Players) {
+            wrList = this.props.widereceivers.widereceivers.Players.map((WR, index) => {
+                return (
+                    <option value="WR1" key={index}>{WR.displayName}</option>
+                )
+            }) 
+        }
         return (
             <div>
                 <form onSubmit={this.goToTe}>
                     <h1>Select Wide Receiver(s)</h1>
-                    <input type="text" placeholder="Wide Receivers" />
+                    <select>
+                        {wrList}
+                    </select>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>
