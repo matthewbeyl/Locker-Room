@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 
-const quarterback = (state = [], action) => {
-    console.log(action);
+const quarterbacks = (state = [], action) => {
+    console.log(action.payload);
     switch (action.type) {
         case PLAYER_ACTIONS.SET_PLAYERS:
             return action.payload || state;
@@ -13,5 +13,5 @@ const quarterback = (state = [], action) => {
 
 
 export default combineReducers({
-    quarterback
+    quarterbacks
 });

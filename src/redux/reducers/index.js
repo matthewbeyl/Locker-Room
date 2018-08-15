@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './userReducer';
 import login from './loginReducer';
-import quarterback from './qbReducer';
+import quarterbacks from './qbReducer';
 
 const store = combineReducers({
   user,
   login,
-  quarterback
+  quarterbacks
 });
 
 export default store;
