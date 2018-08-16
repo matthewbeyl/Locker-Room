@@ -9,8 +9,6 @@ export const PLAYER_ACTIONS = {
     SET_TE: 'SET_TE',
     FETCH_K: 'FETCH_K',
     SET_K: 'SET_K',
-    FETCH_TE: 'FETCH_TE',
-    SET_TE: 'SET_TE',
     FETCH_DEF: 'FETCH_DEF',
     SET_DEF: 'SET_DEF'
 }

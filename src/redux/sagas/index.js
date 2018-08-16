@@ -6,6 +6,7 @@ import rbSaga from './rbSaga';
 import wrSaga from './wrSaga';
 import teSaga from './teSaga';
 import kSaga from './kSaga';
+import defSaga from './defSaga';
 
 
 export default function* rootSaga() {
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     wrSaga(),
     teSaga(),
     kSaga(),
+    defSaga(),
     // watchIncrementAsync()
   ]);
 }

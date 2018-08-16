@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { getKickers } from '../requests/KRequests';
 
 function* kSaga() {    
-    yield takeLatest(PLAYER_ACTIONS.FETCH_TE, fetchK);
+    yield takeLatest(PLAYER_ACTIONS.FETCH_K, fetchK);
   }
 
 function* fetchK() {    

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../redux/actions/playerActions';
+import { fetchDEF } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -17,14 +17,14 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
+    defenses: state.defenses
   });
 
 class DEFPage extends Component {
 
     componentDidMount() {
       this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        // this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchDEF());
     }
 
     goToTeam = (event) => {
@@ -34,11 +34,21 @@ class DEFPage extends Component {
     }
 
     render() {
+        let defList;
+        if (this.props.defenses.defenses.Players) {
+            defList = this.props.defenses.defenses.Players.map((DEF, index) => {
+                return (
+                    <option value="DEF1" key={index}>{DEF.displayName}</option>
+                )
+            })
+        }
         return (
             <div>
                 <form onSubmit={this.goToTeam}>
                     <h1>Select Defense(s)</h1>
-                    <input type="text" placeholder="Defenses" />
+                        <select>
+                            {defList}
+                        </select>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>
