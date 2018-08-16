@@ -17,7 +17,7 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
-    defenses: state.defenses
+    players: state.playerReducer
   });
 
 class DEFPage extends Component {
@@ -35,8 +35,8 @@ class DEFPage extends Component {
 
     render() {
         let defList;
-        if (this.props.defenses.defenses.Players) {
-            defList = this.props.defenses.defenses.Players.map((DEF, index) => {
+        if (this.props.players.defenses.Players) {
+            defList = this.props.players.defenses.Players.map((DEF, index) => {
                 return (
                     <option value="DEF" key={index}>{DEF.displayName}</option>
                 )

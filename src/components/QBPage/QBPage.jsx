@@ -4,7 +4,7 @@ import { fetchQB } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-
+import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
 const styles = theme => ({
     button: {
@@ -17,18 +17,18 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
     user: state.user,
-    quarterbacks: state.quarterbacks
+    players: state.playerReducer
 });
 
 class QBPage extends Component {
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
-          teamQBs: []
+            QB: []
         }
-      }
+    }
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -38,34 +38,30 @@ class QBPage extends Component {
         console.log(event.target.value);
         console.log(this.state);
         this.setState({
-            teamQBs: event.target.value,
+            QB: event.target.value,
         })
     }
 
     goToRb = (event) => {
-        event.preventDefault();        
-        // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.quarterback })
+        event.preventDefault();
+        // this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state.QB })
         this.props.history.push('/rb')
     }
 
     render() {
         let qbList;
-        if (this.props.quarterbacks.quarterbacks.Players) {
-            qbList = this.props.quarterbacks.quarterbacks.Players.map((QB, index) => {
+        if (this.props.players.quarterbacks.Players) {
+            qbList = this.props.players.quarterbacks.Players.map((QB, index) => {
                 return (
-                    // <p key={index}>{QB.displayName}</p>
-                    
-                        <option key={index}>{QB.displayName}</option>
+                    <option key={index}>{QB.displayName}</option>
                 )
             })
-            // console.log(this.props.quarterbacks.quarterbacks.Players);
         }
 
         return (
             <div>
-                {/* {JSON.stringify(this.props.quarterbacks)} */}
                 <form onSubmit={this.goToRb}>
-                    <h1>Select Quarterback(s)</h1>
+                    <h1>Select Quarterbacks</h1>
                     <select onChange={this.handleSelect}>
                         {qbList}
                     </select>

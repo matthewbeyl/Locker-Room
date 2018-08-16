@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-
 const styles = theme => ({
     button: {
       margin: theme.spacing.unit,
@@ -17,7 +16,7 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
-    runningbacks: state.runningbacks
+    players: state.playerReducer
   });
 
 class RBPage extends Component {
@@ -35,17 +34,17 @@ class RBPage extends Component {
 
     render() {
         let rbList;
-        if (this.props.runningbacks.runningbacks.Players) {
-            rbList = this.props.runningbacks.runningbacks.Players.map((RB, index) => {
+        if (this.props.players.runningbacks.Players) {
+            rbList = this.props.players.runningbacks.Players.map((RB, index) => {
                 return (
-                    <option value="RB" key={index}>{RB.displayName}</option>
-                )
+                <option value="RB" key={index}>{RB.displayName}</option>
+            )
             })
         }
         return (
             <div>
                 <form onSubmit={this.goToWr}>
-                    <h1>Select Runningback(s)</h1>
+                    <h1>Select Runningbacks</h1>
                     <select>
                         {rbList}
                     </select>

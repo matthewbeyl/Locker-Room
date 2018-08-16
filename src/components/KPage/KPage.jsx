@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-
 const styles = theme => ({
     button: {
       margin: theme.spacing.unit,
@@ -17,7 +16,7 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
-    kickers: state.kickers
+    players: state.playerReducer
   });
 
 class KPage extends Component {
@@ -35,8 +34,8 @@ class KPage extends Component {
 
     render() {
         let kList;
-        if (this.props.kickers.kickers.Players) {
-            kList = this.props.kickers.kickers.Players.map((K, index) => {
+        if (this.props.players.kickers.Players) {
+            kList = this.props.players.kickers.Players.map((K, index) => {
                 return(
                     <option value="K" key={index}>{K.displayName}</option>
                 )
@@ -45,7 +44,7 @@ class KPage extends Component {
         return (
             <div>
                 <form onSubmit={this.goToDef}>
-                    <h1>Select Kicker(s)</h1>
+                    <h1>Select Kickers</h1>
                     <select>
                         {kList}
                     </select>

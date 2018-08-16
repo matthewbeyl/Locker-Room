@@ -17,7 +17,7 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
-    widereceivers: state.widereceivers
+    players: state.playerReducer
   });
 
 class WRPage extends Component {
@@ -35,8 +35,8 @@ class WRPage extends Component {
 
     render() {
         let wrList;
-        if (this.props.widereceivers.widereceivers.Players) {
-            wrList = this.props.widereceivers.widereceivers.Players.map((WR, index) => {
+        if (this.props.players.widereceivers.Players) {
+            wrList = this.props.players.widereceivers.Players.map((WR, index) => {
                 return (
                     <option value="WR" key={index}>{WR.displayName}</option>
                 )
@@ -45,7 +45,7 @@ class WRPage extends Component {
         return (
             <div>
                 <form onSubmit={this.goToTe}>
-                    <h1>Select Wide Receiver(s)</h1>
+                    <h1>Select Wide Receivers</h1>
                     <select>
                         {wrList}
                     </select>

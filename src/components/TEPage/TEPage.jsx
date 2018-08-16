@@ -16,7 +16,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
     user: state.user,
-    tightends: state.tightends
+    players: state.playerReducer
 });
 
 class TEPage extends Component {
@@ -34,8 +34,8 @@ class TEPage extends Component {
 
     render() {
         let teList;
-        if (this.props.tightends.tightends.Players) {
-            teList = this.props.tightends.tightends.Players.map((TE, index) => {
+        if (this.props.players.tightends.Players) {
+            teList = this.props.players.tightends.Players.map((TE, index) => {
                 return (
                     <option value="TE" key={index}>{TE.displayName}</option>
                 )
@@ -44,7 +44,7 @@ class TEPage extends Component {
         return (
             <div>
                 <form onSubmit={this.goToK}>
-                    <h1>Select Tight End(s)</h1>
+                    <h1>Select Tight Ends</h1>
                     <select>
                         {teList}
                     </select>
