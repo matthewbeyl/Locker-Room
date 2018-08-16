@@ -38,7 +38,7 @@ class RBPage extends Component {
         if (this.props.runningbacks.runningbacks.Players) {
             rbList = this.props.runningbacks.runningbacks.Players.map((RB, index) => {
                 return (
-                    <option value="RB1" key={index}>{RB.displayName}</option>
+                    <option value="RB" key={index}>{RB.displayName}</option>
                 )
             })
         }
@@ -46,6 +46,15 @@ class RBPage extends Component {
             <div>
                 <form onSubmit={this.goToWr}>
                     <h1>Select Runningback(s)</h1>
+                    <select>
+                        {rbList}
+                    </select>
+                    <select>
+                        {rbList}
+                    </select>
+                    <select>
+                        {rbList}
+                    </select>
                     <select>
                         {rbList}
                     </select>

@@ -38,7 +38,7 @@ class DEFPage extends Component {
         if (this.props.defenses.defenses.Players) {
             defList = this.props.defenses.defenses.Players.map((DEF, index) => {
                 return (
-                    <option value="DEF1" key={index}>{DEF.displayName}</option>
+                    <option value="DEF" key={index}>{DEF.displayName}</option>
                 )
             })
         }
@@ -46,6 +46,9 @@ class DEFPage extends Component {
             <div>
                 <form onSubmit={this.goToTeam}>
                     <h1>Select Defense(s)</h1>
+                        <select>
+                            {defList}
+                        </select>
                         <select>
                             {defList}
                         </select>

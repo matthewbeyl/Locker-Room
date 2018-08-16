@@ -37,7 +37,7 @@ class TEPage extends Component {
         if (this.props.tightends.tightends.Players) {
             teList = this.props.tightends.tightends.Players.map((TE, index) => {
                 return (
-                    <option value="TE1" key={index}>{TE.displayName}</option>
+                    <option value="TE" key={index}>{TE.displayName}</option>
                 )
             })
         }
@@ -45,6 +45,9 @@ class TEPage extends Component {
             <div>
                 <form onSubmit={this.goToK}>
                     <h1>Select Tight End(s)</h1>
+                    <select>
+                        {teList}
+                    </select>
                     <select>
                         {teList}
                     </select>

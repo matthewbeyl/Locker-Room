@@ -22,13 +22,28 @@ const mapStateToProps = state => ({
 
 class QBPage extends Component {
 
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          teamQBs: []
+        }
+      }
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchQB());
     }
+    handleSelect = (event) => {
+        console.log(event.target.value);
+        console.log(this.state);
+        this.setState({
+            teamQBs: event.target.value,
+        })
+    }
 
     goToRb = (event) => {
-        event.preventDefault();
+        event.preventDefault();        
         // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.quarterback })
         this.props.history.push('/rb')
     }
@@ -40,10 +55,10 @@ class QBPage extends Component {
                 return (
                     // <p key={index}>{QB.displayName}</p>
                     
-                        <option value="QB1" key={index}>{QB.displayName}</option>
+                        <option key={index}>{QB.displayName}</option>
                 )
             })
-            console.log(this.props.quarterbacks.quarterbacks.Players);
+            // console.log(this.props.quarterbacks.quarterbacks.Players);
         }
 
         return (
@@ -51,7 +66,10 @@ class QBPage extends Component {
                 {/* {JSON.stringify(this.props.quarterbacks)} */}
                 <form onSubmit={this.goToRb}>
                     <h1>Select Quarterback(s)</h1>
-                    <select>
+                    <select onChange={this.handleSelect}>
+                        {qbList}
+                    </select>
+                    <select onChange={this.handleSelect}>
                         {qbList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

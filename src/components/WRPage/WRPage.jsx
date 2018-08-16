@@ -38,7 +38,7 @@ class WRPage extends Component {
         if (this.props.widereceivers.widereceivers.Players) {
             wrList = this.props.widereceivers.widereceivers.Players.map((WR, index) => {
                 return (
-                    <option value="WR1" key={index}>{WR.displayName}</option>
+                    <option value="WR" key={index}>{WR.displayName}</option>
                 )
             }) 
         }
@@ -46,6 +46,15 @@ class WRPage extends Component {
             <div>
                 <form onSubmit={this.goToTe}>
                     <h1>Select Wide Receiver(s)</h1>
+                    <select>
+                        {wrList}
+                    </select>
+                    <select>
+                        {wrList}
+                    </select>
+                    <select>
+                        {wrList}
+                    </select>
                     <select>
                         {wrList}
                     </select>

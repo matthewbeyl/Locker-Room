@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './userReducer';
 import login from './loginReducer';
-import quarterbacks from './qbReducer';
-import runningbacks from './rbReducer';
-import widereceivers from './wrReducer';
-import tightends from './teReducer';
-import kickers from './kReducer';
-import defenses from './defReducer';
+import quarterbacks from './PlayerReducer';
+import runningbacks from './PlayerReducer';
+import widereceivers from './PlayerReducer';
+import tightends from './PlayerReducer';
+import kickers from './PlayerReducer';
+import defenses from './PlayerReducer';
 
 const store = combineReducers({
   user,

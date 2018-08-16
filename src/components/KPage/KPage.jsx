@@ -38,7 +38,7 @@ class KPage extends Component {
         if (this.props.kickers.kickers.Players) {
             kList = this.props.kickers.kickers.Players.map((K, index) => {
                 return(
-                    <option value="K1" key={index}>{K.displayName}</option>
+                    <option value="K" key={index}>{K.displayName}</option>
                 )
             })
         }
@@ -46,6 +46,9 @@ class KPage extends Component {
             <div>
                 <form onSubmit={this.goToDef}>
                     <h1>Select Kicker(s)</h1>
+                    <select>
+                        {kList}
+                    </select>
                     <select>
                         {kList}
                     </select>
