@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPlayers } from '../../redux/actions/playerActions';
+import { fetchK } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -17,14 +17,14 @@ const styles = theme => ({
 
   const mapStateToProps = state => ({
     user: state.user,
+    kickers: state.kickers
   });
 
 class KPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-        // this.props.dispatch(fetchPlayers());
+        this.props.dispatch(fetchK());
     }
 
     goToDef = (event) => {
@@ -34,11 +34,21 @@ class KPage extends Component {
     }
 
     render() {
+        let kList;
+        if (this.props.kickers.kickers.Players) {
+            kList = this.props.kickers.kickers.Players.map((K, index) => {
+                return(
+                    <option value="K1" key={index}>{K.displayName}</option>
+                )
+            })
+        }
         return (
             <div>
                 <form onSubmit={this.goToDef}>
                     <h1>Select Kicker(s)</h1>
-                    <input type="text" placeholder="Kickers" />
+                    <select>
+                        {kList}
+                    </select>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

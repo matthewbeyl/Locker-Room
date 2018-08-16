@@ -7,17 +7,17 @@ import { fetchTE } from '../../redux/actions/playerActions';
 
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
     input: {
-      display: 'none',
+        display: 'none',
     },
-  });
+});
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     user: state.user,
     tightends: state.tightends
-  });
+});
 
 class TEPage extends Component {
 
@@ -37,7 +37,7 @@ class TEPage extends Component {
         if (this.props.tightends.tightends.Players) {
             teList = this.props.tightends.tightends.Players.map((TE, index) => {
                 return (
-                    <option value="TE2" key={index}>{TE.displayName}</option>
+                    <option value="TE1" key={index}>{TE.displayName}</option>
                 )
             })
         }

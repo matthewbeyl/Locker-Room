@@ -5,6 +5,7 @@ import quarterbacks from './qbReducer';
 import runningbacks from './rbReducer';
 import widereceivers from './wrReducer';
 import tightends from './teReducer';
+import kickers from './kReducer';
 
 const store = combineReducers({
   user,
@@ -13,6 +14,7 @@ const store = combineReducers({
   runningbacks,
   widereceivers,
   tightends,
+  kickers,
 });
 
 export default store;
