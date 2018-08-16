@@ -1,6 +1,6 @@
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
-import { getWidereceivers } from '../requests/WRRequest';
+import { getWidereceivers } from '../requests/getPositionsRequests';
 
 function* wrSaga() {    
     yield takeLatest(PLAYER_ACTIONS.FETCH_WR, fetchWR);

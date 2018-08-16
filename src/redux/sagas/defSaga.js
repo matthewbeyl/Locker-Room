@@ -1,6 +1,6 @@
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
-import { getDefenses } from '../requests/DEFRequests';
+import { getDefenses } from '../requests/getPositionsRequests';
 
 function* defSaga() {    
     yield takeLatest(PLAYER_ACTIONS.FETCH_DEF, fetchDEF);

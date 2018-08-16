@@ -1,6 +1,6 @@
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
-import { getRunningbacks } from '../requests/RBRequest';
+import { getRunningbacks } from '../requests/getPositionsRequests';
 
 function* rbSaga() {    
     yield takeLatest(PLAYER_ACTIONS.FETCH_RB, fetchRBs);

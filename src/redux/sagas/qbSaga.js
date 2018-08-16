@@ -1,6 +1,6 @@
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
-import { getQuarterbacks } from '../requests/QBRequest';
+import { getQuarterbacks } from '../requests/getPositionsRequests';
 
 function* qbSaga() {    
     yield takeLatest(PLAYER_ACTIONS.FETCH_QB, fetchQB);

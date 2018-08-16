@@ -1,6 +1,6 @@
 import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { put, takeLatest } from 'redux-saga/effects';
-import { getTightends } from '../requests/TERequests';
+import { getTightends } from '../requests/getPositionsRequests';
 
 function* teSaga() {    
     yield takeLatest(PLAYER_ACTIONS.FETCH_TE, fetchTE);
