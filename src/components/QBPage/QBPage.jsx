@@ -25,8 +25,7 @@ class QBPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            QB: []
+        this.state = { 
         }
     }
 
@@ -34,17 +33,24 @@ class QBPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchQB());
     }
+
+    // propName and await??
+    // handleSelect = propName => async(event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
     handleSelect = (event) => {
         console.log(event.target.value);
-        console.log(this.state);
-        this.setState({
-            QB: event.target.value,
-        })
+        
     }
 
     goToRb = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state.QB })
+        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
         this.props.history.push('/rb')
     }
 
@@ -68,6 +74,12 @@ class QBPage extends Component {
                     <select onChange={this.handleSelect}>
                         {qbList}
                     </select>
+                    {/* <select onChange={this.handleSelect('QB1')}>
+                        {qbList}
+                    </select>
+                    <select onChange={this.handleSelect('QB2')}>
+                        {qbList}
+                    </select> */}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

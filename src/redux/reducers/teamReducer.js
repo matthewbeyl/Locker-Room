@@ -3,12 +3,6 @@ import { TEAM_ACTIONS } from '../actions/teamActions';
 
 const initialState = {
     team: {
-        QB: [],
-        RB: [],
-        WR: [],
-        TE: [],
-        K: [],
-        DEF: [],
     }
 }
 

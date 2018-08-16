@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { fetchTE } from '../../redux/actions/playerActions';
+import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
 const styles = theme => ({
     button: {
@@ -26,9 +27,18 @@ class TEPage extends Component {
         this.props.dispatch(fetchTE());
     }
 
+    // propName and await??
+    handleSelect = propName => async (event) => {
+        console.log(event.target.value);
+        await this.setState({
+            [propName]: event.target.value,
+        })
+        console.log(this.state);
+    }
+
     goToK = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.tightend })
+        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
         this.props.history.push('/k')
     }
 
@@ -37,7 +47,7 @@ class TEPage extends Component {
         if (this.props.players.tightends.Players) {
             teList = this.props.players.tightends.Players.map((TE, index) => {
                 return (
-                    <option value="TE" key={index}>{TE.displayName}</option>
+                    <option key={index}>{TE.displayName}</option>
                 )
             })
         }
@@ -45,10 +55,10 @@ class TEPage extends Component {
             <div>
                 <form onSubmit={this.goToK}>
                     <h1>Select Tight Ends</h1>
-                    <select>
+                    <select onChange={this.handleSelect('TE1')}>
                         {teList}
                     </select>
-                    <select>
+                    <select onChange={this.handleSelect('TE2')}>
                         {teList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

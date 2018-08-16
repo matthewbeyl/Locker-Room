@@ -4,6 +4,7 @@ import { fetchK } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
 const styles = theme => ({
     button: {
@@ -26,9 +27,18 @@ class KPage extends Component {
         this.props.dispatch(fetchK());
     }
 
+    // propName and await??
+    handleSelect = propName => async(event) => {
+        console.log(event.target.value);
+        await this.setState({
+            [propName]: event.target.value,
+        })
+        console.log(this.state);
+    }
+
     goToDef = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.kicker })
+        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
         this.props.history.push('/def')
     }
 
@@ -37,7 +47,7 @@ class KPage extends Component {
         if (this.props.players.kickers.Players) {
             kList = this.props.players.kickers.Players.map((K, index) => {
                 return(
-                    <option value="K" key={index}>{K.displayName}</option>
+                    <option key={index}>{K.displayName}</option>
                 )
             })
         }
@@ -45,10 +55,10 @@ class KPage extends Component {
             <div>
                 <form onSubmit={this.goToDef}>
                     <h1>Select Kickers</h1>
-                    <select>
+                    <select onChange={this.handleSelect('K1')}>
                         {kList}
                     </select>
-                    <select>
+                    <select onChange={this.handleSelect('K2')}>
                         {kList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

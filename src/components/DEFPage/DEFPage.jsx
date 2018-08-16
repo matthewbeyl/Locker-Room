@@ -4,6 +4,7 @@ import { fetchDEF } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
 
 const styles = theme => ({
@@ -27,9 +28,18 @@ class DEFPage extends Component {
         this.props.dispatch(fetchDEF());
     }
 
+    // propName and await??
+    handleSelect = propName => async (event) => {
+        console.log(event.target.value);
+        await this.setState({
+            [propName]: event.target.value,
+        })
+        console.log(this.state);
+    }
+
     goToTeam = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.defense })
+        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
         this.props.history.push('/team')
     }
 
@@ -38,7 +48,7 @@ class DEFPage extends Component {
         if (this.props.players.defenses.Players) {
             defList = this.props.players.defenses.Players.map((DEF, index) => {
                 return (
-                    <option value="DEF" key={index}>{DEF.displayName}</option>
+                    <option key={index}>{DEF.displayName}</option>
                 )
             })
         }
@@ -46,10 +56,10 @@ class DEFPage extends Component {
             <div>
                 <form onSubmit={this.goToTeam}>
                     <h1>Select Defense(s)</h1>
-                        <select>
+                        <select onChange={this.handleSelect('DEF1')}>
                             {defList}
                         </select>
-                        <select>
+                        <select onChange={this.handleSelect('DEF2')}>
                             {defList}
                         </select>
                     <Button type="submit" variant="contained">NEXT</Button>

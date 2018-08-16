@@ -4,21 +4,22 @@ import { fetchWR } from '../../redux/actions/playerActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
 
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
     input: {
-      display: 'none',
+        display: 'none',
     },
-  });
+});
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     user: state.user,
     players: state.playerReducer
-  });
+});
 
 class WRPage extends Component {
 
@@ -27,9 +28,18 @@ class WRPage extends Component {
         this.props.dispatch(fetchWR());
     }
 
+    // propName and await??
+    handleSelect = propName => async (event) => {
+        console.log(event.target.value);
+        await this.setState({
+            [propName]: event.target.value,
+        })
+        console.log(this.state);
+    }
+
     goToTe = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: 'ADD_PLAYER', payload: this.state.tightend })
+        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
         this.props.history.push('/te')
     }
 
@@ -38,24 +48,24 @@ class WRPage extends Component {
         if (this.props.players.widereceivers.Players) {
             wrList = this.props.players.widereceivers.Players.map((WR, index) => {
                 return (
-                    <option value="WR" key={index}>{WR.displayName}</option>
+                    <option key={index}>{WR.displayName}</option>
                 )
-            }) 
+            })
         }
         return (
             <div>
                 <form onSubmit={this.goToTe}>
                     <h1>Select Wide Receivers</h1>
-                    <select>
+                    <select onChange={this.handleSelect('WR1')}>
                         {wrList}
                     </select>
-                    <select>
+                    <select onChange={this.handleSelect('WR2')}>
                         {wrList}
                     </select>
-                    <select>
+                    <select onChange={this.handleSelect('WR3')}>
                         {wrList}
                     </select>
-                    <select>
+                    <select onChange={this.handleSelect('WR4')}>
                         {wrList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

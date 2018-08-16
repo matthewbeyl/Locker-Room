@@ -16,6 +16,7 @@ import WRPage from './components/WRPage/WRPage';
 import TEPage from './components/TEPage/TEPage';
 import KPage from './components/KPage/KPage';
 import DEFPage from './components/DEFPage/DEFPage';
+import CreatePage from './components/CreatePage/CreatePage';
 
 import './styles/main.css';
 
@@ -60,6 +61,10 @@ const App = () => (
         <Route
           path="/def"
           component={DEFPage}
+        />
+        <Route
+          path="/create"
+          component={CreatePage}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
