@@ -1,20 +1,29 @@
-import { combineReducers } from 'redux';
 import { TEAM_ACTIONS } from '../actions/teamActions';
 
 const initialState = {
-    team: []
-    
+    team: {
+        quarterbacks: [],
+        runningbacks: [],
+        widereceivers: [],
+        tightends: [],
+        kickers: [],
+        defenses: []
+
+    }
 }
 
 const teamReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TEAM_ACTIONS.SELECT_PLAYER:
-            return action.payload || state;
+        case TEAM_ACTIONS.ADD_QBS:
+            return {
+                ...state.team,
+                quarterbacks: [...state.team.quarterbacks, action.payload]
+            }
+        case TEAM_ACTIONS.ADD_RBS:
+
         default:
             return state;
     }
 };
 
-export default combineReducers({
-    teamReducer
-});
+export default teamReducer

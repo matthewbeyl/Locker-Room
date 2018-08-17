@@ -26,7 +26,7 @@ class QBPage extends Component {
         super(props);
 
         this.state = { 
-            currentPlayer : []
+            quarterbacks: []
         }
     }
 
@@ -47,15 +47,27 @@ class QBPage extends Component {
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.quarterbacks.Players[event.target.value]
         console.log(pickedPlayer);
-        // this.setState({
-        //     currentPlayer : [...pickedPlayer]
-        // })
-        // console.log(this.state);
+        this.setState({
+            quarterbacks: [...this.state.quarterbacks, pickedPlayer]
+        })
     }
+
+    deleteFromState = (property) => {
+        let newState = this.state.quarterbacks.filter(player => {
+            return player.playerId !== property
+        })
+        this.setState({
+            quarterbacks : newState
+        })
+    }
+
+    // ADD TO STATE
+
+    //REMOVE FROM STATE
 
     goToRb = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS , payload : this.state})
         this.props.history.push('/rb')
     }
 
@@ -69,6 +81,12 @@ class QBPage extends Component {
             })
         }
 
+        let pickedPlayersList = this.state.quarterbacks.map(QB => {
+            return <div>
+                {QB.displayName} <button onClick={() => this.deleteFromState(QB.playerId)}>Delete</button>
+            </div>
+        })
+
         return (
             <div>
                 <form onSubmit={this.goToRb}>
@@ -76,10 +94,9 @@ class QBPage extends Component {
                     <select onChange={this.handleSelect}>
                         {qbList}
                     </select>
-                    <select onChange={this.handleSelect}>
-                        {qbList}
-                    </select>
+                    {pickedPlayersList}
                     <Button type="submit" variant="contained">NEXT</Button>
+
                 </form>
             </div>
         )
