@@ -29,12 +29,17 @@ class DEFPage extends Component {
     }
 
     // propName and await??
-    handleSelect = propName => async (event) => {
-        console.log(event.target.value);
-        await this.setState({
-            [propName]: event.target.value,
-        })
-        console.log(this.state);
+    // handleSelect = propName => async (event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
+    handleSelect = (event) => {
+        let pickedPlayer = this.props.players.defenses.Players[event.target.value]
+        console.log(pickedPlayer);
     }
 
     goToTeam = (event) => {
@@ -48,7 +53,7 @@ class DEFPage extends Component {
         if (this.props.players.defenses.Players) {
             defList = this.props.players.defenses.Players.map((DEF, index) => {
                 return (
-                    <option key={index}>{DEF.displayName}</option>
+                    <option key={index} value={index}>{DEF.displayName}</option>
                 )
             })
         }
@@ -56,10 +61,10 @@ class DEFPage extends Component {
             <div>
                 <form onSubmit={this.goToTeam}>
                     <h1>Select Defense(s)</h1>
-                        <select onChange={this.handleSelect('DEF1')}>
+                        <select onChange={this.handleSelect}>
                             {defList}
                         </select>
-                        <select onChange={this.handleSelect('DEF2')}>
+                        <select onChange={this.handleSelect}>
                             {defList}
                         </select>
                     <Button type="submit" variant="contained">NEXT</Button>

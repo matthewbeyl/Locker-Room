@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import { TEAM_ACTIONS } from '../actions/teamActions';
 
 const initialState = {
-    team: {
-    }
+    team: []
+    
 }
 
 const teamReducer = (state = initialState, action) => {

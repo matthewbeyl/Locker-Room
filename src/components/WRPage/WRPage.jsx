@@ -29,12 +29,17 @@ class WRPage extends Component {
     }
 
     // propName and await??
-    handleSelect = propName => async (event) => {
-        console.log(event.target.value);
-        await this.setState({
-            [propName]: event.target.value,
-        })
-        console.log(this.state);
+    // handleSelect = propName => async (event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
+    handleSelect = (event) => {
+        let pickedPlayer = this.props.players.widereceivers.Players[event.target.value]
+        console.log(pickedPlayer);
     }
 
     goToTe = (event) => {
@@ -48,7 +53,7 @@ class WRPage extends Component {
         if (this.props.players.widereceivers.Players) {
             wrList = this.props.players.widereceivers.Players.map((WR, index) => {
                 return (
-                    <option key={index}>{WR.displayName}</option>
+                    <option key={index} value={index}>{WR.displayName}</option>
                 )
             })
         }
@@ -56,16 +61,16 @@ class WRPage extends Component {
             <div>
                 <form onSubmit={this.goToTe}>
                     <h1>Select Wide Receivers</h1>
-                    <select onChange={this.handleSelect('WR1')}>
+                    <select onChange={this.handleSelect}>
                         {wrList}
                     </select>
-                    <select onChange={this.handleSelect('WR2')}>
+                    <select onChange={this.handleSelect}>
                         {wrList}
                     </select>
-                    <select onChange={this.handleSelect('WR3')}>
+                    <select onChange={this.handleSelect}>
                         {wrList}
                     </select>
-                    <select onChange={this.handleSelect('WR4')}>
+                    <select onChange={this.handleSelect}>
                         {wrList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

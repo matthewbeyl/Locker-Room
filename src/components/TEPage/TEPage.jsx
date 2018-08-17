@@ -28,12 +28,17 @@ class TEPage extends Component {
     }
 
     // propName and await??
-    handleSelect = propName => async (event) => {
-        console.log(event.target.value);
-        await this.setState({
-            [propName]: event.target.value,
-        })
-        console.log(this.state);
+    // handleSelect = propName => async (event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
+    handleSelect = (event) => {
+        let pickedPlayer = this.props.players.tightends.Players[event.target.value]
+        console.log(pickedPlayer);
     }
 
     goToK = (event) => {
@@ -47,7 +52,7 @@ class TEPage extends Component {
         if (this.props.players.tightends.Players) {
             teList = this.props.players.tightends.Players.map((TE, index) => {
                 return (
-                    <option key={index}>{TE.displayName}</option>
+                    <option key={index} value={index}>{TE.displayName}</option>
                 )
             })
         }
@@ -55,10 +60,10 @@ class TEPage extends Component {
             <div>
                 <form onSubmit={this.goToK}>
                     <h1>Select Tight Ends</h1>
-                    <select onChange={this.handleSelect('TE1')}>
+                    <select onChange={this.handleSelect}>
                         {teList}
                     </select>
-                    <select onChange={this.handleSelect('TE2')}>
+                    <select onChange={this.handleSelect}>
                         {teList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

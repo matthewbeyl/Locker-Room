@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
+});
 
 class CreatePage extends Component {
+
+    goToQB = (event) => {
+        event.preventDefault();
+        this.props.history.push('/qb')
+    }
 
     render() {
 
@@ -16,9 +32,14 @@ class CreatePage extends Component {
                 <p>
                     Enter a team name below and click the button to get started!
                 </p>
+                <form onSubmit={this.goToQB}>
+                    <input type="text" placeholder="Team Name" />
+                    <Button type="submit" variant="contained">NEXT</Button>
+                </form>
             </div>
         )
     }
 }
 
-export default connect()(CreatePage)
+const StyledCreatePage = withStyles(styles)(CreatePage);
+export default connect()(StyledCreatePage)

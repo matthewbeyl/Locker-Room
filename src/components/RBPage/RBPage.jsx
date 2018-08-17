@@ -27,13 +27,18 @@ class RBPage extends Component {
         this.props.dispatch(fetchRB());
     }
 
-    // propName and await??
-    handleSelect = propName => async (event) => {
-        console.log(event.target.value);
-        await this.setState({
-            [propName]: event.target.value,
-        })
-        console.log(this.state);
+    // // propName and await??
+    // handleSelect = propName => async (event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
+    handleSelect = (event) => {
+        let pickedPlayer = this.props.players.runningbacks.Players[event.target.value]
+        console.log(pickedPlayer);
     }
 
     goToWr = (event) => {
@@ -47,7 +52,7 @@ class RBPage extends Component {
         if (this.props.players.runningbacks.Players) {
             rbList = this.props.players.runningbacks.Players.map((RB, index) => {
                 return (
-                    <option key={index}>{RB.displayName}</option>
+                    <option key={index} value={index}>{RB.displayName}</option>
                 )
             })
         }
@@ -56,16 +61,16 @@ class RBPage extends Component {
             <div>
                 <form onSubmit={this.goToWr}>
                     <h1>Select Runningbacks</h1>
-                    <select onChange={this.handleSelect('RB1')}>
+                    <select onChange={this.handleSelect}>
                         {rbList}
                     </select>
-                    <select onChange={this.handleSelect('RB2')}>
+                    <select onChange={this.handleSelect}>
                         {rbList}
                     </select>
-                    <select onChange={this.handleSelect('RB3')}>
+                    <select onChange={this.handleSelect}>
                         {rbList}
                     </select>
-                    <select onChange={this.handleSelect('RB4')}>
+                    <select onChange={this.handleSelect}>
                         {rbList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>

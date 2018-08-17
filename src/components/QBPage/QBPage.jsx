@@ -26,6 +26,7 @@ class QBPage extends Component {
         super(props);
 
         this.state = { 
+            currentPlayer : []
         }
     }
 
@@ -44,8 +45,12 @@ class QBPage extends Component {
     // }
 
     handleSelect = (event) => {
-        console.log(event.target.value);
-        
+        let pickedPlayer = this.props.players.quarterbacks.Players[event.target.value]
+        console.log(pickedPlayer);
+        // this.setState({
+        //     currentPlayer : [...pickedPlayer]
+        // })
+        // console.log(this.state);
     }
 
     goToRb = (event) => {
@@ -59,7 +64,7 @@ class QBPage extends Component {
         if (this.props.players.quarterbacks.Players) {
             qbList = this.props.players.quarterbacks.Players.map((QB, index) => {
                 return (
-                    <option key={index}>{QB.displayName}</option>
+                    <option key={index} value={index}>{QB.displayName}</option>
                 )
             })
         }
@@ -74,12 +79,6 @@ class QBPage extends Component {
                     <select onChange={this.handleSelect}>
                         {qbList}
                     </select>
-                    {/* <select onChange={this.handleSelect('QB1')}>
-                        {qbList}
-                    </select>
-                    <select onChange={this.handleSelect('QB2')}>
-                        {qbList}
-                    </select> */}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

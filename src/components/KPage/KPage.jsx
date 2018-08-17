@@ -28,12 +28,17 @@ class KPage extends Component {
     }
 
     // propName and await??
-    handleSelect = propName => async(event) => {
-        console.log(event.target.value);
-        await this.setState({
-            [propName]: event.target.value,
-        })
-        console.log(this.state);
+    // handleSelect = propName => async(event) => {
+    //     console.log(event.target.value);
+    //     await this.setState({
+    //         [propName]: event.target.value,
+    //     })
+    //     console.log(this.state);
+    // }
+
+    handleSelect = (event) => {
+        let pickedPlayer = this.props.players.kickers.Players[event.target.value]
+        console.log(pickedPlayer);
     }
 
     goToDef = (event) => {
@@ -47,7 +52,7 @@ class KPage extends Component {
         if (this.props.players.kickers.Players) {
             kList = this.props.players.kickers.Players.map((K, index) => {
                 return(
-                    <option key={index}>{K.displayName}</option>
+                    <option key={index} value={index}>{K.displayName}</option>
                 )
             })
         }
@@ -55,10 +60,10 @@ class KPage extends Component {
             <div>
                 <form onSubmit={this.goToDef}>
                     <h1>Select Kickers</h1>
-                    <select onChange={this.handleSelect('K1')}>
+                    <select onChange={this.handleSelect}>
                         {kList}
                     </select>
-                    <select onChange={this.handleSelect('K2')}>
+                    <select onChange={this.handleSelect}>
                         {kList}
                     </select>
                     <Button type="submit" variant="contained">NEXT</Button>
