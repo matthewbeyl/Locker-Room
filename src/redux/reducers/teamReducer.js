@@ -20,7 +20,35 @@ const teamReducer = (state = initialState, action) => {
                 quarterbacks: [...state.team.quarterbacks, action.payload]
             }
         case TEAM_ACTIONS.ADD_RBS:
-
+            return {
+                ...state,
+                // ...state.team,
+                runningbacks: [...state.runningbacks, action.payload]
+            }
+        case TEAM_ACTIONS.ADD_WRS:
+            return {
+                ...state,
+                // ...state.team,
+                widereceivers: [...state.widereceivers, action.payload]
+            }
+        case TEAM_ACTIONS.ADD_TES:
+            return {
+                ...state,
+                // ...state.team,
+                tightends: [...state.tightends, action.payload]
+            }
+        case TEAM_ACTIONS.ADD_KS:
+            return {
+                ...state,
+                // ...state.team,
+                kickers: [...state.kickers, action.payload]
+            }
+        case TEAM_ACTIONS.ADD_DEFS:
+            return {
+                ...state,
+                // ...state.team,
+                defenses: [...state.defenses, action.payload]
+            }
         default:
             return state;
     }

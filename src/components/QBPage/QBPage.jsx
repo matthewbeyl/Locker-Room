@@ -57,7 +57,7 @@ class QBPage extends Component {
             return player.playerId !== property
         })
         this.setState({
-            quarterbacks : newState
+            quarterbacks: newState
         })
     }
 
@@ -69,6 +69,8 @@ class QBPage extends Component {
         event.preventDefault();
         this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS , payload : this.state})
         this.props.history.push('/rb')
+        console.log(this.state);
+        
     }
 
     render() {

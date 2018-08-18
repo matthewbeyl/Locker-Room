@@ -48,14 +48,18 @@ class RBPage extends Component {
             return player.playerId !== property
         })
         this.setState({
-            runningbacks : newState
+            runningbacks: newState
         })
     }
 
     goToWr = (event) => {
+        console.log(this.state);
+
         event.preventDefault();
         this.props.dispatch({ type: TEAM_ACTIONS.ADD_RBS, payload: this.state })
         this.props.history.push('/wr')
+        console.log(this.state);
+
     }
 
     render() {

@@ -22,32 +22,45 @@ const styles = theme => ({
 
 class KPage extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            kickers: []
+        }
+    }
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchK());
     }
 
-    // propName and await??
-    // handleSelect = propName => async(event) => {
-    //     console.log(event.target.value);
-    //     await this.setState({
-    //         [propName]: event.target.value,
-    //     })
-    //     console.log(this.state);
-    // }
-
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.kickers.Players[event.target.value]
         console.log(pickedPlayer);
+        this.setState({
+            kickers: [...this.state.kickers, pickedPlayer]
+        })
+    }
+
+    deleteFromState = (property) => {
+        let newState = this.state.kickers.filter(player => {
+            return player.playerId !== property
+        })
+        this.setState({
+            kickers: newState
+        })
     }
 
     goToDef = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_KS, payload: this.state })
         this.props.history.push('/def')
     }
 
     render() {
+        console.log(this.props.players.kickers.Players);
+
         let kList;
         if (this.props.players.kickers.Players) {
             kList = this.props.players.kickers.Players.map((K, index) => {
@@ -56,6 +69,12 @@ class KPage extends Component {
                 )
             })
         }
+
+        let pickerPlayersList = this.state.kickers.map(K => {
+            return <div>
+                {K.displayName} <button onClick={() => this.deleteFromState(K.playerId)}>DELETE</button>
+            </div>
+        })
         return (
             <div>
                 <form onSubmit={this.goToDef}>
@@ -63,9 +82,7 @@ class KPage extends Component {
                     <select onChange={this.handleSelect}>
                         {kList}
                     </select>
-                    <select onChange={this.handleSelect}>
-                        {kList}
-                    </select>
+                    {pickerPlayersList}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

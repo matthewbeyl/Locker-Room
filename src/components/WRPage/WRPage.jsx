@@ -23,28 +23,38 @@ const mapStateToProps = state => ({
 
 class WRPage extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            widereceivers: []
+        }
+    }
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchWR());
     }
 
-    // propName and await??
-    // handleSelect = propName => async (event) => {
-    //     console.log(event.target.value);
-    //     await this.setState({
-    //         [propName]: event.target.value,
-    //     })
-    //     console.log(this.state);
-    // }
-
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.widereceivers.Players[event.target.value]
         console.log(pickedPlayer);
+        this.setState({
+            widereceivers: [...this.state.widereceivers, pickedPlayer]
+        })
     }
 
+    deleteFromState = (property) => {
+        let newState = this.state.widereceivers.filter(player => {
+            return player.playerId !== property
+        })
+        this.setState({
+            widereceivers: newState
+        })
+    }
     goToTe = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_WRS, payload: this.state })
         this.props.history.push('/te')
     }
 
@@ -57,6 +67,12 @@ class WRPage extends Component {
                 )
             })
         }
+
+        let pickedPlayersList = this.state.widereceivers.map(WR => {
+            return <div>
+                {WR.displayName} <button onClick={() => this.deleteFromState(WR.playerId)}>DELETE</button>
+            </div>
+        })
         return (
             <div>
                 <form onSubmit={this.goToTe}>
@@ -64,15 +80,7 @@ class WRPage extends Component {
                     <select onChange={this.handleSelect}>
                         {wrList}
                     </select>
-                    <select onChange={this.handleSelect}>
-                        {wrList}
-                    </select>
-                    <select onChange={this.handleSelect}>
-                        {wrList}
-                    </select>
-                    <select onChange={this.handleSelect}>
-                        {wrList}
-                    </select>
+                    {pickedPlayersList}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

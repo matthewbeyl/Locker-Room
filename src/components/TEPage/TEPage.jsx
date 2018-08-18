@@ -22,28 +22,39 @@ const mapStateToProps = state => ({
 
 class TEPage extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tightends: []
+        }
+    }
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchTE());
     }
 
-    // propName and await??
-    // handleSelect = propName => async (event) => {
-    //     console.log(event.target.value);
-    //     await this.setState({
-    //         [propName]: event.target.value,
-    //     })
-    //     console.log(this.state);
-    // }
-
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.tightends.Players[event.target.value]
         console.log(pickedPlayer);
+        this.setState({
+            tightends: [...this.state.tightends, pickedPlayer]
+        })
+    }
+
+    deleteFromState = (property) => {
+        let newState = this.state.tightends.filter(player => {
+            return player.playerId !== property
+        })
+        this.setState({
+            tightends: newState
+        })
     }
 
     goToK = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_TES, payload: this.state })
         this.props.history.push('/k')
     }
 
@@ -56,6 +67,12 @@ class TEPage extends Component {
                 )
             })
         }
+        
+        let pickedPlayersList = this.state.tightends.map(TE => {
+            return <div>
+                {TE.displayName} <button onClick={() => this.deleteFromState(TE.playerId)}>DELETE</button>
+            </div>
+        })
         return (
             <div>
                 <form onSubmit={this.goToK}>
@@ -63,9 +80,7 @@ class TEPage extends Component {
                     <select onChange={this.handleSelect}>
                         {teList}
                     </select>
-                    <select onChange={this.handleSelect}>
-                        {teList}
-                    </select>
+                    {pickedPlayersList}                    
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>

@@ -6,49 +6,63 @@ import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
-
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
     input: {
-      display: 'none',
+        display: 'none',
     },
-  });
+});
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     user: state.user,
     players: state.playerReducer
-  });
+});
 
 class DEFPage extends Component {
 
-    componentDidMount() {
-      this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch(fetchDEF());
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            defenses: []
+        }
     }
 
-    // propName and await??
-    // handleSelect = propName => async (event) => {
-    //     console.log(event.target.value);
-    //     await this.setState({
-    //         [propName]: event.target.value,
-    //     })
-    //     console.log(this.state);
-    // }
+    componentDidMount() {
+        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch(fetchDEF());
+    }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.defenses.Players[event.target.value]
         console.log(pickedPlayer);
+        this.setState({
+            defenses: [...this.state.defenses, pickedPlayer]
+        })
+    }
+
+    deleteFromState = (property) => {
+        let newState = this.state.defenses.filter(player => {
+            return player.playerId !== property
+        })
+        this.setState({
+            defenses: newState
+        })
     }
 
     goToTeam = (event) => {
+        // console.log(this.state);
+        
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.SELECT_PLAYER, payload: this.state })
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_DEFS, payload: this.state })
         this.props.history.push('/team')
     }
 
     render() {
+        console.log(this.props.players.defenses.Players);
+        
         let defList;
         if (this.props.players.defenses.Players) {
             defList = this.props.players.defenses.Players.map((DEF, index) => {
@@ -57,16 +71,20 @@ class DEFPage extends Component {
                 )
             })
         }
+
+        let pickedPlayerList = this.state.defenses.map(DEF => {
+            return <div>
+                {DEF.displayName} <button onClick={() => this.deleteFromState(DEF.playerId)}>DELETE</button>
+            </div>
+        })
         return (
             <div>
                 <form onSubmit={this.goToTeam}>
-                    <h1>Select Defense(s)</h1>
-                        <select onChange={this.handleSelect}>
-                            {defList}
-                        </select>
-                        <select onChange={this.handleSelect}>
-                            {defList}
-                        </select>
+                    <h1>Select Defenses</h1>
+                    <select onChange={this.handleSelect}>
+                        {defList}
+                    </select>
+                    {pickedPlayerList}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
             </div>
