@@ -70,7 +70,7 @@ class WRPage extends Component {
 
         let pickedPlayersList = this.state.widereceivers.map(WR => {
             return <div>
-                {WR.displayName} <button onClick={() => this.deleteFromState(WR.playerId)}>DELETE</button>
+                {WR.displayName} {/*<button onClick={() => this.deleteFromState(WR.playerId)}>DELETE</button> */}
             </div>
         })
         return (

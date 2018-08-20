@@ -35,15 +35,6 @@ class QBPage extends Component {
         this.props.dispatch(fetchQB());
     }
 
-    // propName and await??
-    // handleSelect = propName => async(event) => {
-    //     console.log(event.target.value);
-    //     await this.setState({
-    //         [propName]: event.target.value,
-    //     })
-    //     console.log(this.state);
-    // }
-
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.quarterbacks.Players[event.target.value]
         console.log(pickedPlayer);
@@ -61,16 +52,10 @@ class QBPage extends Component {
         })
     }
 
-    // ADD TO STATE
-
-    //REMOVE FROM STATE
-
     goToRb = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS , payload : this.state})
         this.props.history.push('/rb')
-        console.log(this.state);
-        
     }
 
     render() {
@@ -85,7 +70,7 @@ class QBPage extends Component {
 
         let pickedPlayersList = this.state.quarterbacks.map(QB => {
             return <div>
-                {QB.displayName} <button onClick={() => this.deleteFromState(QB.playerId)}>Delete</button>
+                {QB.displayName} {/*<button onClick={() => this.deleteFromState(QB.playerId)}>Delete</button> */}
             </div>
         })
 

@@ -38,6 +38,8 @@ class CreatePage extends Component {
     }
 
     postTeamName = () => {
+        console.log(this.state.teamName);
+        
         axios.post('/api/template', this.state)
             .then((response) => {
                 console.log(response);

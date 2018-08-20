@@ -8,7 +8,6 @@ const initialState = {
         tightends: [],
         kickers: [],
         defenses: []
-
     }
 }
 
@@ -17,7 +16,7 @@ const teamReducer = (state = initialState, action) => {
         case TEAM_ACTIONS.ADD_QBS:
             return {
                 ...state.team,
-                quarterbacks: [...state.team.quarterbacks, action.payload]
+                quarterbacks: state.team.quarterbacks && state.team.quarterbacks.length > 0 ? [...state.team.quarterbacks, action.payload] : [action.payload]
             }
         case TEAM_ACTIONS.ADD_RBS:
             return {

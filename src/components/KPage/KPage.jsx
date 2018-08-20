@@ -59,8 +59,6 @@ class KPage extends Component {
     }
 
     render() {
-        console.log(this.props.players.kickers.Players);
-
         let kList;
         if (this.props.players.kickers.Players) {
             kList = this.props.players.kickers.Players.map((K, index) => {
@@ -72,7 +70,7 @@ class KPage extends Component {
 
         let pickerPlayersList = this.state.kickers.map(K => {
             return <div>
-                {K.displayName} <button onClick={() => this.deleteFromState(K.playerId)}>DELETE</button>
+                {K.displayName} {/*<button onClick={() => this.deleteFromState(K.playerId)}>DELETE</button> */}
             </div>
         })
         return (

@@ -74,7 +74,7 @@ class RBPage extends Component {
 
         let pickedPlayersList = this.state.runningbacks.map(RB => {
             return <div>
-                {RB.displayName} <button onClick={() => this.deleteFromState(RB.playerId)}>DELETE</button>
+                {RB.displayName} {/*<button onClick={() => this.deleteFromState(RB.playerId)}>DELETE</button> */}
             </div>
         })
 

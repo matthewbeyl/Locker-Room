@@ -70,7 +70,7 @@ class TEPage extends Component {
         
         let pickedPlayersList = this.state.tightends.map(TE => {
             return <div>
-                {TE.displayName} <button onClick={() => this.deleteFromState(TE.playerId)}>DELETE</button>
+                {TE.displayName} {/*<button onClick={() => this.deleteFromState(TE.playerId)}>DELETE</button> */}
             </div>
         })
         return (

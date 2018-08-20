@@ -52,17 +52,13 @@ class DEFPage extends Component {
         })
     }
 
-    goToTeam = (event) => {
-        // console.log(this.state);
-        
+    goToConfirm = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: TEAM_ACTIONS.ADD_DEFS, payload: this.state })
-        this.props.history.push('/team')
+        this.props.history.push('/confirm')
     }
 
     render() {
-        console.log(this.props.players.defenses.Players);
-        
         let defList;
         if (this.props.players.defenses.Players) {
             defList = this.props.players.defenses.Players.map((DEF, index) => {
@@ -74,12 +70,12 @@ class DEFPage extends Component {
 
         let pickedPlayerList = this.state.defenses.map(DEF => {
             return <div>
-                {DEF.displayName} <button onClick={() => this.deleteFromState(DEF.playerId)}>DELETE</button>
+                {DEF.displayName} {/*<button onClick={() => this.deleteFromState(DEF.playerId)}>DELETE</button> */}
             </div>
         })
         return (
             <div>
-                <form onSubmit={this.goToTeam}>
+                <form onSubmit={this.goToConfirm}>
                     <h1>Select Defenses</h1>
                     <select onChange={this.handleSelect}>
                         {defList}

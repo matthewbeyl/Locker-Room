@@ -16,15 +16,29 @@ router.get('/:player_type', (req, res) => {
     })
 });
 
+// router.post('/', (req, res) => {
+//     console.log(req.body);
+//     // pool.query(`INSERT INTO "player"
+//     // ("playerId", "jersey", "displayName", "team", "position", "height", "weight", "dob", "college", "team_id")
+//     // VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`, [req.body.teamReducer.team.quarterbacks.playerId, req.body.teamReducer.team.quarterbacks.jersey])
+//     //     .then((results) => {
+//     //         res.sendStatus(201);
+//     //     }).catch((errorFromPG) => {
+//     //         res.sendStatus(500);
+//     //     })
+
+// })
+
 /**
  * POST route template
  */
 router.post('/', (req, res) => {
-    console.log(req.body.user);
-    
+    console.log(req.user.id);
+
+    console.log(req.body.teamName);
     pool.query(`INSERT INTO "team"
-    ("name")
-    VALUES ($1, $2);`, [person_id, req.body.teamName])
+    ("name", "person_id")
+    VALUES ($1, $2);`, [req.body.teamName, req.user.id])
     .then((results) => {
         res.sendStatus(201);
     }).catch((errorFromPG) => {
