@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { fetchK } from '../../redux/actions/playerActions';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
 
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
     input: {
-      display: 'none',
+        display: 'none',
     },
-  });
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+    },
+});
 
   const mapStateToProps = state => ({
     user: state.user,
@@ -59,30 +76,44 @@ class KPage extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         let kList;
         if (this.props.players.kickers.Players) {
             kList = this.props.players.kickers.Players.map((K, index) => {
                 return(
-                    <option key={index} value={index}>{K.displayName}</option>
+                    <MenuItem key={index} value={index}>{K.displayName}</MenuItem>
                 )
             })
         }
 
-        let pickerPlayersList = this.state.kickers.map(K => {
+        let pickedPlayersList = this.state.kickers.map(K => {
             return <div>
                 {K.displayName} {/*<button onClick={() => this.deleteFromState(K.playerId)}>DELETE</button> */}
             </div>
         })
         return (
             <div>
-                <form onSubmit={this.goToDef}>
+                <form className={classes.root} autoComplete="off" onSubmit={this.goToDef}>
                     <h1>Select Kickers</h1>
-                    <select onChange={this.handleSelect}>
-                        {kList}
-                    </select>
-                    {pickerPlayersList}
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value=''
+                            onChange={this.handleSelect}
+                            displayEmpty
+                            name="Kickers"
+                            className={classes.selectEmpty}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            {kList}
+                        </Select>
+                        <FormHelperText>Select Kickers</FormHelperText>
+                    </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
-                </form>
+                </form> 
+                {pickedPlayersList}
             </div>
         )
     }

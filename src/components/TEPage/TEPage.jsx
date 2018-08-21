@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { fetchTE } from '../../redux/actions/playerActions';
 import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
+
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 const styles = theme => ({
     button: {
@@ -12,6 +19,17 @@ const styles = theme => ({
     },
     input: {
         display: 'none',
+    },
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
     },
 });
 
@@ -59,11 +77,13 @@ class TEPage extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         let teList;
         if (this.props.players.tightends.Players) {
             teList = this.props.players.tightends.Players.map((TE, index) => {
                 return (
-                    <option key={index} value={index}>{TE.displayName}</option>
+                    <MenuItem key={index} value={index}>{TE.displayName}</MenuItem>
                 )
             })
         }
@@ -75,14 +95,26 @@ class TEPage extends Component {
         })
         return (
             <div>
-                <form onSubmit={this.goToK}>
-                    <h1>Select Tight Ends</h1>
-                    <select onChange={this.handleSelect}>
-                        {teList}
-                    </select>
-                    {pickedPlayersList}                    
+                <form className={classes.root} autoComplete="off" onSubmit={this.goToK}>
+                    <h1>Select tightends</h1>
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value=''
+                            onChange={this.handleSelect}
+                            displayEmpty
+                            name="tightends"
+                            className={classes.selectEmpty}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            {teList}
+                        </Select>
+                        <FormHelperText>Select tightends</FormHelperText>
+                    </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
+                {pickedPlayersList}
             </div>
         )
     }

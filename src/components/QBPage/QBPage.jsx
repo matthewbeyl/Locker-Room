@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { fetchQB } from '../../redux/actions/playerActions';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
+
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     button: {
@@ -12,6 +18,17 @@ const styles = theme => ({
     },
     input: {
         display: 'none',
+    },
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
     },
 });
 
@@ -25,7 +42,7 @@ class QBPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = {
             quarterbacks: []
         }
     }
@@ -54,16 +71,18 @@ class QBPage extends Component {
 
     goToRb = (event) => {
         event.preventDefault();
-        this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS , payload : this.state})
+        this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS, payload: this.state })
         this.props.history.push('/rb')
     }
 
     render() {
+        const { classes } = this.props;
+
         let qbList;
         if (this.props.players.quarterbacks.Players) {
             qbList = this.props.players.quarterbacks.Players.map((QB, index) => {
                 return (
-                    <option key={index} value={index}>{QB.displayName}</option>
+                    <MenuItem key={index} value={index}>{QB.displayName}</MenuItem>
                 )
             })
         }
@@ -76,15 +95,26 @@ class QBPage extends Component {
 
         return (
             <div>
-                <form onSubmit={this.goToRb}>
+                <form className={classes.root} autoComplete="off" onSubmit={this.goToRb}>
                     <h1>Select Quarterbacks</h1>
-                    <select onChange={this.handleSelect}>
-                        {qbList}
-                    </select>
-                    {pickedPlayersList}
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value=''
+                            onChange={this.handleSelect}
+                            displayEmpty
+                            name="Quarterbacks"
+                            className={classes.selectEmpty}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            {qbList}
+                        </Select>
+                        <FormHelperText>Select Quarterbacks</FormHelperText>
+                    </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
-
                 </form>
+                {pickedPlayersList}
             </div>
         )
     }

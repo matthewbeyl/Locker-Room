@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { fetchWR } from '../../redux/actions/playerActions';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { TEAM_ACTIONS } from '../../redux/actions/teamActions';
+
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 
 const styles = theme => ({
@@ -13,6 +20,17 @@ const styles = theme => ({
     },
     input: {
         display: 'none',
+    },
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
     },
 });
 
@@ -59,11 +77,13 @@ class WRPage extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         let wrList;
         if (this.props.players.widereceivers.Players) {
             wrList = this.props.players.widereceivers.Players.map((WR, index) => {
                 return (
-                    <option key={index} value={index}>{WR.displayName}</option>
+                    <MenuItem key={index} value={index}>{WR.displayName}</MenuItem>
                 )
             })
         }
@@ -75,14 +95,26 @@ class WRPage extends Component {
         })
         return (
             <div>
-                <form onSubmit={this.goToTe}>
-                    <h1>Select Wide Receivers</h1>
-                    <select onChange={this.handleSelect}>
-                        {wrList}
-                    </select>
-                    {pickedPlayersList}
+                <form className={classes.root} autoComplete="off" onSubmit={this.goToTe}>
+                    <h1>Select Widereceivers</h1>
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            value=''
+                            onChange={this.handleSelect}
+                            displayEmpty
+                            name="Widereceivers"
+                            className={classes.selectEmpty}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            {wrList}
+                        </Select>
+                        <FormHelperText>Select Widereceivers</FormHelperText>
+                    </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
+                {pickedPlayersList}
             </div>
         )
     }

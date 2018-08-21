@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { PLAYER_ACTIONS } from '../../redux/actions/playerActions';
-// import Axios from 'axios';
+// import { PLAYER_ACTIONS } from '../../redux/actions/playerActions';
+import Axios from 'axios';
+
 
 const styles = theme => ({
     button: {
@@ -13,6 +16,7 @@ const styles = theme => ({
     input: {
         display: 'none',
     },
+    
 });
 
 const mapStateToProps = state => ({
@@ -35,8 +39,8 @@ class ConfirmPage extends Component {
     }
 
     // confirmTeam = () => {
-    //     console.log(this.props.team.quarterbacks);
-    //     Axios.post('/api/template', this.props.team.quarterbacks)
+    //     console.log(this.props.team);
+    //     Axios.post('/api/template/player', this.props.team)
     //     .then((response) => {
     //         console.log(response);
     //     }).catch((error) => {
@@ -51,16 +55,19 @@ class ConfirmPage extends Component {
         this.props.history.push('/team')
     }
 
+    sendToDB = (players) => {
+        console.log(players);
+        Axios.post('/api/template/player', players)
+        .then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log('error: ', error);
+        })
+    }
+
     render() {
         console.log(this.props.team);
-        // let teamList;
-        // if (this.props.team) {
-        //     teamList = this.props.map((Players, index) => {
-        //         return (
-        //             <option key={index}>{Players.displayName}</option>
-        //         )
-        //     })
-        // }
+        
         let players = []
         for(let key in this.props.team) {
             this.props.team[key].map((playersFromForm, index) => {
@@ -69,27 +76,22 @@ class ConfirmPage extends Component {
                         console.log(player);
                         console.log(player.displayName);
                         
-                        return [ <p>{player.displayName}</p>]
+                        return  player
                     })
-                    players = players.length > 0 ? [...players, tempPlayers] : [tempPlayers];
+                    players = players.length > 0 ? [...players, ...tempPlayers] : [...tempPlayers];
                 }
             })
         }
+
+        this.sendToDB(players);
 
         
         return (
             <div>                
                 <form onSubmit={this.goToTeam}>
-                {/* {JSON.stringify(this.props.team.quarterbacks)}
-                {JSON.stringify(this.props.team.runningbacks)}
-                {JSON.stringify(this.props.team.widereceivers)}
-                {JSON.stringify(this.props.team.tightends)}
-                {JSON.stringify(this.props.team.kickers)}
-                {JSON.stringify(this.props.team.defenses)} */}
-                {players}
-                {/* {teamList} */}
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form> 
+                {/* {players} */}
             </div>
         )
     }
