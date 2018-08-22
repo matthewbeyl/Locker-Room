@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 // import { PLAYER_ACTIONS } from '../../redux/actions/playerActions';
 import Axios from 'axios';
-
 
 const styles = theme => ({
     button: {
@@ -16,7 +14,7 @@ const styles = theme => ({
     input: {
         display: 'none',
     },
-    
+
 });
 
 const mapStateToProps = state => ({
@@ -29,7 +27,7 @@ class ConfirmPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = {
             team: []
         }
     }
@@ -38,59 +36,61 @@ class ConfirmPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     }
 
-    // confirmTeam = () => {
-    //     console.log(this.props.team);
-    //     Axios.post('/api/template/player', this.props.team)
-    //     .then((response) => {
-    //         console.log(response);
-    //     }).catch((error) => {
-    //         console.log('error: ', error);
-    //     })
-    // }
-
     goToTeam = (event) => {
         event.preventDefault();
-        // this.props.dispatch({ type: TEAM_ACTIONS.ADD_DEFS, payload: this.state })
-        // this.confirmTeam();
-        this.props.history.push('/team')
-    }
-
-    sendToDB = (players) => {
-        console.log(players);
-        Axios.post('/api/template/player', players)
-        .then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log('error: ', error);
-        })
-    }
-
-    render() {
-        console.log(this.props.team);
-        
         let players = []
-        for(let key in this.props.team) {
+        for (let key in this.props.team) {
             this.props.team[key].map((playersFromForm, index) => {
-                for(let key1 in playersFromForm){
+                for (let key1 in playersFromForm) {
                     let tempPlayers = playersFromForm[key1].map(player => {
                         console.log(player);
                         console.log(player.displayName);
-                        
-                        return  player
+                        return player
                     })
                     players = players.length > 0 ? [...players, ...tempPlayers] : [...tempPlayers];
                 }
             })
         }
+        this.getTeamId()
+            .then(response => {
+                let teamId = response[0].id;
+                this.sendToDB(teamId, players);
+            }).catch(err => {
+                console.log(err);
+            });
+        this.props.history.push('/team')
+    }
+    
+    getTeamId() {
+        return Axios.post('/api/template/join')
+            .then((response) => {
+                console.log(response.data);
+                return response.data
+            }).catch((error) => {
+                console.log('Error - ', error);
+                return error
+            })
+    }
 
-        this.sendToDB(players);
+    sendToDB = (teamId, players) => {
+        console.log(players);
+        // send teamId along with players
+        Axios.post('/api/template/player', { teamId: teamId, players: players })
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log('Error - ', error);
+            })
+    }
 
-        
+    render() {
+        console.log(this.props.team);
+
         return (
-            <div>                
+            <div>
                 <form onSubmit={this.goToTeam}>
                     <Button type="submit" variant="contained">NEXT</Button>
-                </form> 
+                </form>
                 {/* {players} */}
             </div>
         )
