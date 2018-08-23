@@ -4,17 +4,21 @@ const request = require('request');
 const pool = require('../modules/pool');
 
 router.get('/userteam', (req, res) => {
-    console.log('userteam route');
-    pool.query(`SELECT * FROM "player" 
-    JOIN "team" ON "player"."team_id" = "team.id"
-    JOIN "person" ON "team"."person_id" = "person.id"
-    WHERE person.id = $1;`)
+    console.log('userteam get route');
+    // console.log(req.user.id);
+    pool.query(`SELECT * FROM "player"
+    JOIN "team" ON "player".team_id = team.id
+    JOIN "person" ON "team".person_id = person.id
+    WHERE person.id = ${[req.user.id]}`)
         .then((result) => {
+            console.log(result.rows);
             res.send(result.rows);
         }).catch((error) => {
             console.log('Error - ', error);
+            res.sendStatus(500)
         })
 })
+
 router.get('/:player_type', (req, res) => {
     let options = {
         url: `https://www.fantasyfootballnerd.com/service/players/json/qft55ekjyswk/${req.params.player_type}`,

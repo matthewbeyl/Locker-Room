@@ -10,7 +10,7 @@ function* fetchTeam() {
     try {
         const UserTeam = yield getUserTeam();
         yield put({
-            type: TEAM_ACTIONS.FETCH_TEAM,
+            type: TEAM_ACTIONS.SET_USER_TEAM,
             payload: UserTeam
           });
     } catch (error) {

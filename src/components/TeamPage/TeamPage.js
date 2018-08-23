@@ -18,7 +18,7 @@ class TeamPage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.props.dispatch(fetchTeam());
+    this.props.dispatch({ type: TEAM_ACTIONS.FETCH_TEAM });
   }
 
   componentDidUpdate() {
