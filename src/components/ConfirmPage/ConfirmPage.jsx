@@ -39,8 +39,9 @@ class ConfirmPage extends Component {
     goToTeam = (event) => {
         event.preventDefault();
         let players = []
-        for (let key in this.props.team) {
-            this.props.team[key].map((playersFromForm, index) => {
+        for (let key in this.props.team.teamReducer) {
+            console.log(this.props.team.teamReducer);
+            this.props.team.teamReducer[key].map((playersFromForm, index) => {
                 for (let key1 in playersFromForm) {
                     let tempPlayers = playersFromForm[key1].map(player => {
                         console.log(player);
@@ -51,8 +52,13 @@ class ConfirmPage extends Component {
                 }
             })
         }
+
+        console.log('______________________________');
+        console.log(this.props.team);
+        
         this.getTeamId()
             .then(response => {
+                console.log('______________________________');
                 let teamId = response[0].id;
                 this.sendToDB(teamId, players);
             }).catch(err => {
@@ -60,7 +66,7 @@ class ConfirmPage extends Component {
             });
         this.props.history.push('/team')
     }
-    
+
     getTeamId() {
         return Axios.post('/api/template/join')
             .then((response) => {
@@ -84,7 +90,6 @@ class ConfirmPage extends Component {
     }
 
     render() {
-        console.log(this.props.team);
 
         return (
             <div>

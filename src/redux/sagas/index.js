@@ -7,6 +7,7 @@ import wrSaga from './wrSaga';
 import teSaga from './teSaga';
 import kSaga from './kSaga';
 import defSaga from './defSaga';
+import teamSaga from './teamSaga';
 
 
 export default function* rootSaga() {
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     teSaga(),
     kSaga(),
     defSaga(),
+    teamSaga(),
     // watchIncrementAsync()
   ]);
 }
