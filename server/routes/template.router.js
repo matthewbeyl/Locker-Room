@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 router.get('/userteam', (req, res) => {
     console.log('userteam get route');
     // console.log(req.user.id);
-    pool.query(`SELECT * FROM "player"
+    pool.query(`SELECT "displayName", "position", "jersey", "team" FROM "player"
     JOIN "team" ON "player".team_id = team.id
     JOIN "person" ON "team".person_id = person.id
     WHERE person.id = ${[req.user.id]}`)

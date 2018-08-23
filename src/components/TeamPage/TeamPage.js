@@ -28,6 +28,9 @@ class TeamPage extends Component {
   }
 
   render() {
+    console.log(this.props.userTeam.userTeamReducer);
+    
+    
     let content = null;
 
     if (this.props.user.userName) {
@@ -42,6 +45,7 @@ class TeamPage extends Component {
       <div>
         <Nav />
         { content }
+        {JSON.stringify(this.props.userTeam.userTeamReducer)}
       </div>
     );
   }
