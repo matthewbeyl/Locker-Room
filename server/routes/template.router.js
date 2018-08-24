@@ -4,14 +4,11 @@ const request = require('request');
 const pool = require('../modules/pool');
 
 router.get('/userteam', (req, res) => {
-    console.log('userteam get route');
-    // console.log(req.user.id);
     pool.query(`SELECT "displayName", "position", "jersey", "team" FROM "player"
     JOIN "team" ON "player".team_id = team.id
     JOIN "person" ON "team".person_id = person.id
     WHERE person.id = ${[req.user.id]}`)
         .then((result) => {
-            console.log(result.rows);
             res.send(result.rows);
         }).catch((error) => {
             console.log('Error - ', error);
@@ -29,13 +26,6 @@ router.get('/:player_type', (req, res) => {
         res.send(response.body)
     })
 });
-
-
-
-// SELECT * FROM "player"
-// JOIN "team" ON "player".team_id = team.id
-// JOIN "person" ON "team".person_id = person.id
-// WHERE person.id = 1;
 
 router.post('/join', (req, res) => {
         pool.query(`SELECT team.id FROM team
@@ -73,8 +63,6 @@ router.post('/player', (req, res) => {
     })
 
 router.post('/team', (req, res) => {
-        console.log(req.user.id);
-        console.log(req.body.teamName);
         pool.query(`INSERT INTO "team"
     ("name", "person_id")
     VALUES ($1, $2);`, [req.body.teamName, req.user.id])
