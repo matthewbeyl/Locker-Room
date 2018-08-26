@@ -36,6 +36,12 @@ class ConfirmPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     }
 
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
+
     goToTeam = (event) => {
         event.preventDefault();
         let players = []
@@ -44,6 +50,8 @@ class ConfirmPage extends Component {
             this.props.team.teamReducer[key].map((playersFromForm, index) => {
                 for (let key1 in playersFromForm) {
                     let tempPlayers = playersFromForm[key1].map(player => {
+                        console.log(playersFromForm);
+                        
                         console.log(player);
                         console.log(player.displayName);
                         return player
@@ -93,7 +101,12 @@ class ConfirmPage extends Component {
 
         return (
             <div>
+                <h1>Congratulations!</h1>
+                <p>
+                    Your team is ready to go! Click Next to save your team and proceed to management!
+                </p>
                 <form onSubmit={this.goToTeam}>
+
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
                 {/* {players} */}

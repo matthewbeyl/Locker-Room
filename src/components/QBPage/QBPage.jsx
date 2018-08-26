@@ -30,6 +30,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
 const mapStateToProps = state => ({
@@ -43,7 +46,7 @@ class QBPage extends Component {
         super(props);
 
         this.state = {
-            quarterbacks: []
+            quarterbacks: [],
         }
     }
 
@@ -51,6 +54,12 @@ class QBPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchQB());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.quarterbacks.Players[event.target.value]
@@ -73,7 +82,7 @@ class QBPage extends Component {
         event.preventDefault();
         this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS, payload: this.state })
         this.props.history.push('/rb')
-    }
+    };
 
     render() {
         const { classes } = this.props;
@@ -89,7 +98,7 @@ class QBPage extends Component {
 
         let pickedPlayersList = this.state.quarterbacks.map(QB => {
             return <div>
-                {QB.displayName} {/*<button onClick={() => this.deleteFromState(QB.playerId)}>Delete</button> */}
+                {QB.displayName} <button onClick={() => this.deleteFromState(QB.playerId)}>REMOVE</button>
             </div>
         })
 

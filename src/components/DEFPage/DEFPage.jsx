@@ -30,6 +30,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
 const mapStateToProps = state => ({
@@ -51,6 +54,12 @@ class DEFPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchDEF());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.defenses.Players[event.target.value]
@@ -89,7 +98,7 @@ class DEFPage extends Component {
 
         let pickedPlayersList = this.state.defenses.map(DEF => {
             return <div>
-                {DEF.displayName} {/*<button onClick={() => this.deleteFromState(DEF.playerId)}>DELETE</button> */}
+                {DEF.displayName} <button onClick={() => this.deleteFromState(DEF.playerId)}>REMOVE</button>
             </div>
         })
         return (

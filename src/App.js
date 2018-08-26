@@ -18,6 +18,7 @@ import KPage from './components/KPage/KPage';
 import DEFPage from './components/DEFPage/DEFPage';
 import CreatePage from './components/CreatePage/CreatePage';
 import ConfirmPage from './components/ConfirmPage/ConfirmPage';
+import PlayerPage from './components/PlayerPage/PlayerPage';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -30,7 +31,7 @@ const muiTheme = getMuiTheme(darkBaseTheme)
 const App = () => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div>
-      <Header title="Welcome to Locker Room" />
+      <Header title="LR" />
       <Router>
         <Switch>
           <Redirect exact from="/" to="/home" />
@@ -77,6 +78,10 @@ const App = () => (
           <Route
             path="/confirm"
             component={ConfirmPage}
+          />
+          <Route
+            path="/player"
+            component={PlayerPage}
           />
           {/* OTHERWISE (no path!) */}
           <Route render={() => <h1>404</h1>} />

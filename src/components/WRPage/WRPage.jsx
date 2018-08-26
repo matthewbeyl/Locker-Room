@@ -32,6 +32,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
 const mapStateToProps = state => ({
@@ -53,6 +56,12 @@ class WRPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchWR());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.widereceivers.Players[event.target.value]
@@ -90,7 +99,7 @@ class WRPage extends Component {
 
         let pickedPlayersList = this.state.widereceivers.map(WR => {
             return <div>
-                {WR.displayName} {/*<button onClick={() => this.deleteFromState(WR.playerId)}>DELETE</button> */}
+                {WR.displayName} <button onClick={() => this.deleteFromState(WR.playerId)}>REMOVE</button>
             </div>
         })
         return (

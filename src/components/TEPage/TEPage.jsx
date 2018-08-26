@@ -31,6 +31,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
 const mapStateToProps = state => ({
@@ -52,6 +55,12 @@ class TEPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchTE());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.tightends.Players[event.target.value]
@@ -90,7 +99,7 @@ class TEPage extends Component {
         
         let pickedPlayersList = this.state.tightends.map(TE => {
             return <div>
-                {TE.displayName} {/*<button onClick={() => this.deleteFromState(TE.playerId)}>DELETE</button> */}
+                {TE.displayName} <button onClick={() => this.deleteFromState(TE.playerId)}>REMOVE</button>
             </div>
         })
         return (

@@ -30,6 +30,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
   const mapStateToProps = state => ({
@@ -51,6 +54,12 @@ class KPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchK());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.kickers.Players[event.target.value]
@@ -89,7 +98,7 @@ class KPage extends Component {
 
         let pickedPlayersList = this.state.kickers.map(K => {
             return <div>
-                {K.displayName} {/*<button onClick={() => this.deleteFromState(K.playerId)}>DELETE</button> */}
+                {K.displayName} <button onClick={() => this.deleteFromState(K.playerId)}>REMOVE</button>
             </div>
         })
         return (

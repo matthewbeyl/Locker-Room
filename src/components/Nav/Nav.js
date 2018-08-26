@@ -15,7 +15,7 @@ class Nav extends Component {
     return (
       <div className="navbar">
         <div>
-          <button onClick={this.logout} id="logOut"> Log Out
+          <button onClick={this.logout} className="logOut"> Log Out
           </button>
         </div>
       </div>

@@ -17,14 +17,14 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-   display: "flex",
-   flexDirection: "row",
-   flexWrap: "wrap",
-   padding: "6%"
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    padding: "6%"
   },
   playerCard: {
     margin: "1% 1% 1% 1%"
-  }
+  },
 };
 
 const mapStateToProps = state => ({
@@ -45,22 +45,32 @@ class TeamPage extends Component {
     }
   }
 
+  goToPlayer = (event) => {
+    event.preventDefault();
+    // this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS, payload: this.state })
+    this.props.history.push('/player')
+};
+
   render() {
 
-    let {classes} = this.props
+    let { classes } = this.props
     console.log(this.props.userTeam.userTeamReducer);
 
     const teamCards = this.props.userTeam.userTeamReducer.map((userPlayer, index) => {
       // return (<Card key={index}>{userPlayer.displayName}</Card>)
       return (<Card className={classes.playerCard}>
-        <img alt='' src="http://wingsfm.com/wp-content/uploads/2017/01/1408678004000-GenericFootball.jpg" height='200px' width='auto' />
-        
+        <img alt='' src="http://wingsfm.com/wp-content/uploads/2017/01/1408678004000-GenericFootball.jpg" height='150px' width='auto' />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2" key={index}>
             {userPlayer.displayName}
           </Typography>
         </CardContent>
         <CardActions>
+          <form onSubmit={this.goToPlayer}>
+          <Button type="submit" size="small" variant="contained">
+            See More
+          </Button>
+          </form>
         </CardActions>
       </Card>)
     })
@@ -70,17 +80,23 @@ class TeamPage extends Component {
     if (this.props.user.userName) {
       content = (
         <div className={classes.card}>
-          
-          
+
+
           {teamCards}
-          
+          <Card className={classes.addPlayerCard}>
+            <CardContent>
+              <Typography gutterBottom variant="headline" component="h2">
+              </Typography>
+            </CardContent>
+            <CardActions>
+            </CardActions>
+          </Card>
         </div>
       );
     }
 
     return (
       <div>
-        <Nav />
         <h1>{this.props.user.userName}'s team</h1>
         {content}
       </div>

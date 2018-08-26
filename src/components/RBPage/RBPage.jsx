@@ -30,6 +30,9 @@ const styles = theme => ({
     selectEmpty: {
         marginTop: theme.spacing.unit * 2,
     },
+    root: {
+        width: '90%',
+    },
 });
 
 const mapStateToProps = state => ({
@@ -51,6 +54,12 @@ class RBPage extends Component {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch(fetchRB());
     }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+          this.props.history.push('home');
+        }
+      }
 
     handleSelect = (event) => {
         let pickedPlayer = this.props.players.runningbacks.Players[event.target.value]
@@ -93,7 +102,7 @@ class RBPage extends Component {
 
         let pickedPlayersList = this.state.runningbacks.map(RB => {
             return <div>
-                {RB.displayName} {/*<button onClick={() => this.deleteFromState(RB.playerId)}>DELETE</button> */}
+                {RB.displayName} <button onClick={() => this.deleteFromState(RB.playerId)}>REMOVE</button>
             </div>
         })
 
