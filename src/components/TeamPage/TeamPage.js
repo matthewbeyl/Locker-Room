@@ -34,6 +34,14 @@ const mapStateToProps = state => ({
 
 class TeamPage extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      playerToDisplay: ''
+    }
+  }
+
   componentDidMount() {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     this.props.dispatch({ type: TEAM_ACTIONS.FETCH_TEAM });
@@ -45,11 +53,19 @@ class TeamPage extends Component {
     }
   }
 
+  // handleClick = (event) => {
+  //   let clickedPlayer = this.props.userPlayer[event.target.value]
+  //   console.log(clickedPlayer);
+  //   this.setState({
+  //     quarterbacks: [...this.state.playerToDisplay, clickedPlayer]
+  //   })
+  // }
+
   goToPlayer = (event) => {
     event.preventDefault();
-    // this.props.dispatch({ type: TEAM_ACTIONS.ADD_QBS, payload: this.state })
+    this.props.dispatch({ type: TEAM_ACTIONS.DISPLAY_PLAYER, payload: this.state })
     this.props.history.push('/player')
-};
+  };
 
   render() {
 
@@ -60,6 +76,7 @@ class TeamPage extends Component {
       // return (<Card key={index}>{userPlayer.displayName}</Card>)
       return (<Card className={classes.playerCard}>
         <img alt='' src="http://wingsfm.com/wp-content/uploads/2017/01/1408678004000-GenericFootball.jpg" height='150px' width='auto' />
+        <img alt='player image' src="`https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/`" />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2" key={index}>
             {userPlayer.displayName}
@@ -67,8 +84,8 @@ class TeamPage extends Component {
         </CardContent>
         <CardActions>
           <form onSubmit={this.goToPlayer}>
-          <Button type="submit" size="small" variant="contained">
-            See More
+            <Button type="submit" size="small" variant="contained">
+              See More
           </Button>
           </form>
         </CardActions>
@@ -106,5 +123,3 @@ class TeamPage extends Component {
 
 const StyledTeamPage = withStyles(styles)(TeamPage);
 export default connect(mapStateToProps)(StyledTeamPage);
-
-// export default connect(mapStateToProps)(TeamPage);

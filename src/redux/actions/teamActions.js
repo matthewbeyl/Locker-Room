@@ -9,7 +9,8 @@ export const TEAM_ACTIONS = {
     ADD_WRS: 'ADD_WRS',
     ADD_TES: 'ADD_TES',
     ADD_KS: 'ADD_KS',
-    ADD_DEFS: 'ADD_DEFS'
+    ADD_DEFS: 'ADD_DEFS',
+    DISPLAY_PLAYER: 'DISPLAY_PLAYER',
 }
 
 export function fetchTeam() {

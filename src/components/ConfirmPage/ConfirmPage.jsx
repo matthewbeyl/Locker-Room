@@ -50,23 +50,14 @@ class ConfirmPage extends Component {
             this.props.team.teamReducer[key].map((playersFromForm, index) => {
                 for (let key1 in playersFromForm) {
                     let tempPlayers = playersFromForm[key1].map(player => {
-                        console.log(playersFromForm);
-                        
-                        console.log(player);
-                        console.log(player.displayName);
                         return player
                     })
                     players = players.length > 0 ? [...players, ...tempPlayers] : [...tempPlayers];
                 }
             })
         }
-
-        console.log('______________________________');
-        console.log(this.props.team);
-        
         this.getTeamId()
             .then(response => {
-                console.log('______________________________');
                 let teamId = response[0].id;
                 this.sendToDB(teamId, players);
             }).catch(err => {
