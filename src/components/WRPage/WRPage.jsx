@@ -11,6 +11,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Paper from '@material-ui/core/Paper';
+
 
 
 
@@ -104,6 +106,7 @@ class WRPage extends Component {
         })
         return (
             <div>
+                <Paper>
                 <form className={classes.root} autoComplete="off" onSubmit={this.goToTe}>
                     <h1>Select Widereceivers</h1>
                     <FormControl className={classes.formControl}>
@@ -123,6 +126,7 @@ class WRPage extends Component {
                     </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
+                </Paper>
                 {pickedPlayersList}
             </div>
         )

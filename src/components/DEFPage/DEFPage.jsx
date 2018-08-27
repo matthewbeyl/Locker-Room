@@ -11,6 +11,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
     button: {
@@ -103,6 +105,7 @@ class DEFPage extends Component {
         })
         return (
             <div>
+                <Paper>
                 <form className={classes.root} autoComplete="off" onSubmit={this.goToConfirm}>
                     <h1>Select Defenses</h1>
                     <FormControl className={classes.formControl}>
@@ -122,6 +125,7 @@ class DEFPage extends Component {
                     </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
+                </Paper>
                 {pickedPlayersList}
             </div>
         )

@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 // import { PLAYER_ACTIONS } from '../../redux/actions/playerActions';
 import Axios from 'axios';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
     button: {

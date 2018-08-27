@@ -14,6 +14,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = {
   card: {
@@ -63,7 +65,7 @@ class TeamPage extends Component {
 
   goToPlayer = (event) => {
     event.preventDefault();
-    this.props.dispatch({ type: TEAM_ACTIONS.DISPLAY_PLAYER, payload: this.state })
+    // this.props.dispatch({ type: TEAM_ACTIONS.DISPLAY_PLAYER, payload: this.state })
     this.props.history.push('/player')
   };
 
@@ -75,8 +77,8 @@ class TeamPage extends Component {
     const teamCards = this.props.userTeam.userTeamReducer.map((userPlayer, index) => {
       // return (<Card key={index}>{userPlayer.displayName}</Card>)
       return (<Card className={classes.playerCard}>
-        <img alt='' src="http://wingsfm.com/wp-content/uploads/2017/01/1408678004000-GenericFootball.jpg" height='150px' width='auto' />
-        <img alt='player image' src="`https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/`" />
+        <img alt='player image' src="http://wingsfm.com/wp-content/uploads/2017/01/1408678004000-GenericFootball.jpg" height='150px' width='auto' />
+        {/* <img alt='player image' src="" /> */}
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2" key={index}>
             {userPlayer.displayName}

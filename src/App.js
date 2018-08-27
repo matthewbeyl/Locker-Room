@@ -19,17 +19,11 @@ import DEFPage from './components/DEFPage/DEFPage';
 import CreatePage from './components/CreatePage/CreatePage';
 import ConfirmPage from './components/ConfirmPage/ConfirmPage';
 import PlayerPage from './components/PlayerPage/PlayerPage';
-
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import 'typeface-roboto'
 
 import './styles/main.css';
-import { MuiThemeProvider } from '@material-ui/core';
-
-const muiTheme = getMuiTheme(darkBaseTheme)
 
 const App = () => (
-  <MuiThemeProvider muiTheme={muiTheme}>
     <div>
       <Header title="LR" />
       <Router>
@@ -88,7 +82,6 @@ const App = () => (
         </Switch>
       </Router>
     </div>
-  </MuiThemeProvider>
 );
 
 export default App;

@@ -7,6 +7,8 @@ import { USER_ACTIONS } from "../../redux/actions/userActions";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
     button: {

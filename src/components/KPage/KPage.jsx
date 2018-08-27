@@ -11,6 +11,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
     button: {
@@ -103,6 +105,7 @@ class KPage extends Component {
         })
         return (
             <div>
+                <Paper>
                 <form className={classes.root} autoComplete="off" onSubmit={this.goToDef}>
                     <h1>Select Kickers</h1>
                     <FormControl className={classes.formControl}>
@@ -121,7 +124,8 @@ class KPage extends Component {
                         <FormHelperText>Select Kickers</FormHelperText>
                     </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
-                </form> 
+                </form>
+                </Paper> 
                 {pickedPlayersList}
             </div>
         )

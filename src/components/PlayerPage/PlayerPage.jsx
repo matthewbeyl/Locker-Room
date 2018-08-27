@@ -101,7 +101,7 @@ class PlayerPage extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <h1>Player Page</h1>
+                    {/* <h1>Player Page</h1> */}
                 </div>
             );
         }

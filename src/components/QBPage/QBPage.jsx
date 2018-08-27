@@ -11,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     button: {
@@ -86,6 +87,7 @@ class QBPage extends Component {
 
     render() {
         const { classes } = this.props;
+        
 
         let qbList;
         if (this.props.players.quarterbacks.Players) {
@@ -104,6 +106,7 @@ class QBPage extends Component {
 
         return (
             <div>
+                <Paper>
                 <form className={classes.root} autoComplete="off" onSubmit={this.goToRb}>
                     <h1>Select Quarterbacks</h1>
                     <FormControl className={classes.formControl}>
@@ -123,6 +126,7 @@ class QBPage extends Component {
                     </FormControl>
                     <Button type="submit" variant="contained">NEXT</Button>
                 </form>
+                </Paper>
                 {pickedPlayersList}
             </div>
         )
