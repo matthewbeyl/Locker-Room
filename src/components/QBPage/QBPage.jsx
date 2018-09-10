@@ -106,6 +106,7 @@ class QBPage extends Component {
 
         return (
             <div>
+            <div>
                 <Paper>
                 <form className={classes.root} autoComplete="off" onSubmit={this.goToRb}>
                     <h1>Select Quarterbacks</h1>
@@ -128,6 +129,7 @@ class QBPage extends Component {
                 </form>
                 </Paper>
                 {pickedPlayersList}
+            </div>
             </div>
         )
     }
