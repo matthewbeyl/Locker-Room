@@ -12,6 +12,10 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { TableHead } from '@material-ui/core/TableHead';
+import { TableRow } from '@material-ui/core/TableRow';
+import { TableCell } from '@material-ui/core/TableCell';
+import { Checkbox } from '@material-ui/core/Checkbox';
 
 const styles = theme => ({
     button: {
@@ -87,7 +91,7 @@ class QBPage extends Component {
 
     render() {
         const { classes } = this.props;
-        
+
 
         let qbList;
         if (this.props.players.quarterbacks.Players) {
@@ -106,30 +110,37 @@ class QBPage extends Component {
 
         return (
             <div>
-            <div>
-                <Paper>
-                <form className={classes.root} autoComplete="off" onSubmit={this.goToRb}>
-                    <h1>Select Quarterbacks</h1>
-                    <FormControl className={classes.formControl}>
-                        <Select
-                            value=''
-                            onChange={this.handleSelect}
-                            displayEmpty
-                            name="Quarterbacks"
-                            className={classes.selectEmpty}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            {qbList}
-                        </Select>
-                        <FormHelperText>Select Quarterbacks</FormHelperText>
-                    </FormControl>
-                    <Button type="submit" variant="contained">NEXT</Button>
-                </form>
-                </Paper>
-                {pickedPlayersList}
-            </div>
+                <TableHead>
+                    <TableRow>
+                        <TableCell padding="checkbox">
+
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                {/* <div>
+                    <Paper>
+                        <form className={classes.root} autoComplete="off" onSubmit={this.goToRb}>
+                            <h1>Select Quarterbacks</h1>
+                            <FormControl className={classes.formControl}>
+                                <Select
+                                    value=''
+                                    onChange={this.handleSelect}
+                                    displayEmpty
+                                    name="Quarterbacks"
+                                    className={classes.selectEmpty}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    {qbList}
+                                </Select>
+                                <FormHelperText>Select Quarterbacks</FormHelperText>
+                            </FormControl>
+                            <Button type="submit" variant="contained">NEXT</Button>
+                        </form>
+                    </Paper>
+                    {pickedPlayersList}
+                </div> */}
             </div>
         )
     }
