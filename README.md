@@ -1,6 +1,6 @@
 # Locker Room
 
-    Locker Room was created to allow users the ability to visualize and research fantasy football players in a clean environment.  Using the Fantasy Football Nerd API, users are able to select players they would like to add to their team - allowing them to research and manage the seleted players.
+Locker Room was created to allow users the ability to visualize and research fantasy football players in a clean environment.  Using the Fantasy Football Nerd API, users are able to select players they would like to add to their team - allowing them to research and manage the seleted players.
 
 ## Built With
 
